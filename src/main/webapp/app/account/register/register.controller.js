@@ -19,17 +19,22 @@
         vm.registerAccount = {};
         vm.success = null;
 
+
+
         $timeout(function (){angular.element('#login').focus();});
 
         function register () {
             if (vm.registerAccount.password !== vm.confirmPassword) {
                 vm.doNotMatch = 'ERROR';
             } else {
+
                 vm.registerAccount.langKey =  'en' ;
                 vm.doNotMatch = null;
                 vm.error = null;
                 vm.errorUserExists = null;
                 vm.errorEmailExists = null;
+
+                Copyuser.save(vm.copyuser, onSaveSuccess, onSaveError);
 
                 Auth.createAccount(vm.registerAccount).then(function () {
                     vm.success = 'OK';
@@ -45,5 +50,6 @@
                 });
             }
         }
+
     }
 })();
